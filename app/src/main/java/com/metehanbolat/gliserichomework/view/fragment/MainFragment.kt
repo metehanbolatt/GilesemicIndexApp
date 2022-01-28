@@ -1,10 +1,13 @@
 package com.metehanbolat.gliserichomework.view.fragment
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.metehanbolat.gliserichomework.databinding.FragmentMainBinding
@@ -22,6 +25,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel : MainFragmentViewModel
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +36,17 @@ class MainFragment : Fragment() {
 
         viewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
 
+        sharedPreferences = this.requireActivity().getSharedPreferences("com.metehanbolat.gliserichomework", Context.MODE_PRIVATE)
+
         viewModel.viewModelScope.launch(Dispatchers.IO) {
-            val document = Jsoup.connect(URL).get()
-            viewModel.getData(document)
+            val control = sharedPreferences.getInt("control", 0)
+            if (control == 0){
+                val document = Jsoup.connect(URL).get()
+                viewModel.getData(document)
+                // aşağıdakini 0 dan farklı bir değer yaparsan verileri sadece bir kere çeker.
+                // Burdan sonra database almalısın.
+                sharedPreferences.edit().putInt("control", 0).apply()
+            }
         }
 
         return view
@@ -48,8 +60,11 @@ class MainFragment : Fragment() {
                 val tableList = ArrayList<String>()
                 val featuresList = listOf("Besin maddesi", "Glisemik indeks", "Karbonhidrat miktarı (100 g'daki)", "Kalori (100 g'daki)")
                 val dataList = it
-                for (i in 0 until dataList.size - 3){
-                    //println(dataList[i])
+                // Sondaki saçma şeyler silindi.
+                for (i in 1..3){
+                    dataList.removeAt(dataList.size - 1)
+                }
+                for (i in 0 until dataList.size){
                     for ((index, a) in dataList[i].withIndex()){
                         if (a != ' '){
                             if (a.isLowerCase() || a.isDigit()){
@@ -66,10 +81,7 @@ class MainFragment : Fragment() {
                 dataList.removeAll(tableList)
                 // Data List Featurestan arındırıldı.
                 dataList.removeAll(featuresList)
-                // En sondaki saçma şeyler temizlendi.
-                for (i in 1..3){
-                    dataList.removeAt(dataList.size - 1)
-                }
+
                 // Datalar saf halde
                 //println(dataList)
 
