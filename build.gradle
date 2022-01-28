@@ -5,9 +5,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        def nav_version = "2.5.0-alpha01"
         classpath "com.android.tools.build:gradle:7.1.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
         classpath 'com.google.gms:google-services:4.3.10'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 
