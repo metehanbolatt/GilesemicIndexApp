@@ -7,26 +7,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentMainBinding
-import com.metehanbolat.gliserichomework.model.FoodFeatures
+import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.utils.Constants.URL
 import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
-import java.util.*
-import kotlin.collections.ArrayList
 
 class MainFragment : Fragment() {
 
     private var _binding : FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel : MainFragmentViewModel
+    private lateinit var mainFragmentViewModel : MainFragmentViewModel
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
@@ -36,20 +35,19 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        viewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
+        mainFragmentViewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
 
         sharedPreferences = this.requireActivity().getSharedPreferences("com.metehanbolat.gliserichomework", Context.MODE_PRIVATE)
 
-        viewModel.viewModelScope.launch(Dispatchers.IO) {
+        mainFragmentViewModel.viewModelScope.launch(Dispatchers.IO) {
             val control = sharedPreferences.getInt("control", 0)
             if (control == 0) {
                 val document = Jsoup.connect(URL).get()
-                viewModel.getData(document)
+                mainFragmentViewModel.getData(document)
                 // aşağıdakini 0 dan farklı bir değer yaparsan verileri sadece bir kere çeker.
                 // Burdan sonra database almalısın.
-                sharedPreferences.edit().putInt("control", 1).apply()
                 withContext(Dispatchers.Main) {
-                    viewModel.firstDataList.observe(viewLifecycleOwner) {
+                    mainFragmentViewModel.firstDataList.observe(viewLifecycleOwner) {
                         if (!it.isNullOrEmpty()) {
                             val tableList = ArrayList<String>()
                             val featuresList = listOf(
@@ -97,9 +95,10 @@ class MainFragment : Fragment() {
                                     3 -> caloriesList.add(data)
                                 }
                             }
-                            val foodFeaturesList = ArrayList<FoodFeatures>()
+                            val foodFeaturesList = ArrayList<FoodFeaturesModel>()
                             for (i in 0 until foodNameList.size) {
-                                val foodFeatures = FoodFeatures(
+                                val foodFeatures = FoodFeaturesModel(
+                                    0,
                                     foodNameList[i],
                                     glycemicIndexList[i],
                                     carbohydratesList[i],
@@ -107,11 +106,16 @@ class MainFragment : Fragment() {
                                 )
                                 foodFeaturesList.add(foodFeatures)
                             }
-                            println(foodFeaturesList)
-
+                            // RoomDatabase'e ekleme işlemi
+                            foodFeaturesList.forEach { foodFeatures ->
+                                println(foodFeatures)
+                                mainFragmentViewModel.addFoodFeatures(foodFeatures)
+                            }
+                            println("Buraya geldik")
                         }
                     }
                 }
+                sharedPreferences.edit().putInt("control", 1).apply()
             }
         }
 

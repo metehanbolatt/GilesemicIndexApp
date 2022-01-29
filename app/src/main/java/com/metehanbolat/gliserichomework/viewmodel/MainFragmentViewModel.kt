@@ -1,14 +1,20 @@
 package com.metehanbolat.gliserichomework.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesDatabase
+import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.nodes.Document
 
-class MainFragmentViewModel : ViewModel() {
+class MainFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     val firstDataList = MutableLiveData<ArrayList<String>>()
+    private val readAllData: LiveData<List<FoodFeaturesModel>>
+    private val repository: FoodFeaturesRepository
 
     suspend fun getData(document: Document) {
         withContext(Dispatchers.Main) {
@@ -20,6 +26,18 @@ class MainFragmentViewModel : ViewModel() {
                     firstDataList.notifyObserver()
                 }
             }
+        }
+    }
+
+    init {
+        val foodFeaturesDao = FoodFeaturesDatabase.getDatabase(application).foodFeaturesDao()
+        repository = FoodFeaturesRepository(foodFeaturesDao)
+        readAllData = repository.readAllData
+    }
+
+    fun addFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addFoodFeatures(foodFeaturesModel)
         }
     }
 

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class FoodFeaturesModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val name: String,
+    val foodName: String,
     val glycemicIndex: String,
     val carbohydrates: String,
     val calories: String
