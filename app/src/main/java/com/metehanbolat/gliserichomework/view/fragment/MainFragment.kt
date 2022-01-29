@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
+import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentMainBinding
 import com.metehanbolat.gliserichomework.model.FoodFeatures
 import com.metehanbolat.gliserichomework.utils.Constants.URL
@@ -40,12 +42,76 @@ class MainFragment : Fragment() {
 
         viewModel.viewModelScope.launch(Dispatchers.IO) {
             val control = sharedPreferences.getInt("control", 0)
-            if (control == 0){
+            if (control == 0) {
                 val document = Jsoup.connect(URL).get()
                 viewModel.getData(document)
                 // aşağıdakini 0 dan farklı bir değer yaparsan verileri sadece bir kere çeker.
                 // Burdan sonra database almalısın.
-                sharedPreferences.edit().putInt("control", 0).apply()
+                sharedPreferences.edit().putInt("control", 1).apply()
+                withContext(Dispatchers.Main) {
+                    viewModel.firstDataList.observe(viewLifecycleOwner) {
+                        if (!it.isNullOrEmpty()) {
+                            val tableList = ArrayList<String>()
+                            val featuresList = listOf(
+                                "Besin maddesi",
+                                "Glisemik indeks",
+                                "Karbonhidrat miktarı (100 g'daki)",
+                                "Kalori (100 g'daki)"
+                            )
+                            val dataList = it
+                            // Sondaki saçma şeyler silindi.
+                            for (i in 1..3) {
+                                dataList.removeAt(dataList.size - 1)
+                            }
+                            for (i in 0 until dataList.size) {
+                                for ((index, a) in dataList[i].withIndex()) {
+                                    if (a != ' ') {
+                                        if (a.isLowerCase() || a.isDigit()) {
+                                            break
+                                        } else {
+                                            if (index == dataList[i].length - 1) {
+                                                tableList.add(dataList[i])
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            // Data List Başlıktan arındırıldı.
+                            dataList.removeAll(tableList)
+                            // Data List Featurestan arındırıldı.
+                            dataList.removeAll(featuresList)
+
+                            // Datalar saf halde
+                            //println(dataList)
+
+                            val foodNameList = ArrayList<String>()
+                            val glycemicIndexList = ArrayList<String>()
+                            val carbohydratesList = ArrayList<String>()
+                            val caloriesList = ArrayList<String>()
+                            // Yemeklerin özelliklerini ayrı ayrı listelere aldım.
+                            for ((index, data) in dataList.withIndex()) {
+                                when (index % 4) {
+                                    0 -> foodNameList.add(data)
+                                    1 -> glycemicIndexList.add(data)
+                                    2 -> carbohydratesList.add(data)
+                                    3 -> caloriesList.add(data)
+                                }
+                            }
+                            val foodFeaturesList = ArrayList<FoodFeatures>()
+                            for (i in 0 until foodNameList.size) {
+                                val foodFeatures = FoodFeatures(
+                                    foodNameList[i],
+                                    glycemicIndexList[i],
+                                    carbohydratesList[i],
+                                    caloriesList[i]
+                                )
+                                foodFeaturesList.add(foodFeatures)
+                            }
+                            println(foodFeaturesList)
+
+                        }
+                    }
+                }
             }
         }
 
@@ -55,57 +121,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.firstDataList.observe(viewLifecycleOwner){
-            if (!it.isNullOrEmpty()){
-                val tableList = ArrayList<String>()
-                val featuresList = listOf("Besin maddesi", "Glisemik indeks", "Karbonhidrat miktarı (100 g'daki)", "Kalori (100 g'daki)")
-                val dataList = it
-                // Sondaki saçma şeyler silindi.
-                for (i in 1..3){
-                    dataList.removeAt(dataList.size - 1)
-                }
-                for (i in 0 until dataList.size){
-                    for ((index, a) in dataList[i].withIndex()){
-                        if (a != ' '){
-                            if (a.isLowerCase() || a.isDigit()){
-                                break
-                            }else {
-                                if (index == dataList[i].length - 1){
-                                    tableList.add(dataList[i])
-                                }
-                            }
-                        }
-                    }
-                }
-                // Data List Başlıktan arındırıldı.
-                dataList.removeAll(tableList)
-                // Data List Featurestan arındırıldı.
-                dataList.removeAll(featuresList)
-
-                // Datalar saf halde
-                //println(dataList)
-
-                val foodNameList = ArrayList<String>()
-                val glycemicIndexList = ArrayList<String>()
-                val carbohydratesList = ArrayList<String>()
-                val caloriesList = ArrayList<String>()
-                // Yemeklerin özelliklerini ayrı ayrı listelere aldım.
-                for ((index, data) in dataList.withIndex()){
-                    when(index % 4){
-                        0 -> foodNameList.add(data)
-                        1 -> glycemicIndexList.add(data)
-                        2 -> carbohydratesList.add(data)
-                        3 -> caloriesList.add(data)
-                    }
-                }
-                val foodFeaturesList = ArrayList<FoodFeatures>()
-                for (i in 0 until foodNameList.size){
-                    val foodFeatures = FoodFeatures(foodNameList[i], glycemicIndexList[i], carbohydratesList[i], caloriesList[i])
-                    foodFeaturesList.add(foodFeatures)
-                }
-                println(foodFeaturesList)
-
-            }
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_addUpdateFragment)
         }
 
     }

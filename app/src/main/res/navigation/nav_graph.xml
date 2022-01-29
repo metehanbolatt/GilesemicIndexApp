@@ -9,5 +9,18 @@
         android:id="@+id/mainFragment"
         android:name="com.metehanbolat.gliserichomework.view.fragment.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_addUpdateFragment"
+            app:destination="@id/addUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUpdateFragment"
+        android:name="com.metehanbolat.gliserichomework.view.fragment.AddUpdateFragment"
+        android:label="fragment_add_update"
+        tools:layout="@layout/fragment_add_update" >
+        <action
+            android:id="@+id/action_addUpdateFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
