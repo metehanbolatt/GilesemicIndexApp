@@ -1,4 +1,4 @@
-package com.metehanbolat.gliserichomework.roomdatabase
+package com.metehanbolat.gliserichomework.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

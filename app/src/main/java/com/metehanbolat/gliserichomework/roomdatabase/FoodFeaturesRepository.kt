@@ -1,6 +1,7 @@
 package com.metehanbolat.gliserichomework.roomdatabase
 
 import androidx.lifecycle.LiveData
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 
 class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
 

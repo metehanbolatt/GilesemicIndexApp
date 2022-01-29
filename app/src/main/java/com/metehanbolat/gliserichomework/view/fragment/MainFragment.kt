@@ -11,8 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
+import com.metehanbolat.gliserichomework.adapter.FoodFeaturesRecyclerAdapter
 import com.metehanbolat.gliserichomework.databinding.FragmentMainBinding
-import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.utils.Constants.URL
 import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
 import kotlinx.coroutines.Dispatchers
@@ -108,15 +109,21 @@ class MainFragment : Fragment() {
                             }
                             // RoomDatabase'e ekleme işlemi
                             foodFeaturesList.forEach { foodFeatures ->
-                                println(foodFeatures)
                                 mainFragmentViewModel.addFoodFeatures(foodFeatures)
                             }
-                            println("Buraya geldik")
                         }
                     }
                 }
                 sharedPreferences.edit().putInt("control", 1).apply()
             }
+        }
+
+        val foodFeaturesAdapter = FoodFeaturesRecyclerAdapter()
+        val recyclerView = binding.recyclerView
+        recyclerView.adapter = foodFeaturesAdapter
+
+        mainFragmentViewModel.readAllData.observe(viewLifecycleOwner) { foodFeatures ->
+            foodFeaturesAdapter.setData(foodFeatures)
         }
 
         return view

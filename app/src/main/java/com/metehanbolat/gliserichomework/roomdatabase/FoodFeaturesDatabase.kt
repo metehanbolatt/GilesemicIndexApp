@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 
 @Database(entities = [FoodFeaturesModel::class], version = 1, exportSchema = false)
 abstract class FoodFeaturesDatabase: RoomDatabase() {

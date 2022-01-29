@@ -10,8 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentAddUpdateBinding
-import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesViewModel
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
 
 class AddUpdateFragment : Fragment() {

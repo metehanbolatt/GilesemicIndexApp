@@ -3,7 +3,7 @@ package com.metehanbolat.gliserichomework.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesDatabase
-import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import org.jsoup.nodes.Document
 class MainFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     val firstDataList = MutableLiveData<ArrayList<String>>()
-    private val readAllData: LiveData<List<FoodFeaturesModel>>
+    val readAllData: LiveData<List<FoodFeaturesModel>>
     private val repository: FoodFeaturesRepository
 
     suspend fun getData(document: Document) {
