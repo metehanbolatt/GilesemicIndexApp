@@ -3,10 +3,10 @@ package com.metehanbolat.gliserichomework.view.fragment
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -16,7 +16,7 @@ import com.metehanbolat.gliserichomework.databinding.FragmentMainBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.model.CategoryModel
 import com.metehanbolat.gliserichomework.utils.Constants.URL
-import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
+import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,8 +27,9 @@ class MainFragment : Fragment() {
     private var _binding : FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var mainFragmentViewModel : MainFragmentViewModel
+    private lateinit var commonViewModel : CommonViewModel
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var foodFeaturesAdapter: FoodFeaturesRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,19 +38,19 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        mainFragmentViewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
+        commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
 
         sharedPreferences = this.requireActivity().getSharedPreferences("com.metehanbolat.gliserichomework", Context.MODE_PRIVATE)
 
-        mainFragmentViewModel.viewModelScope.launch(Dispatchers.IO) {
+        commonViewModel.viewModelScope.launch(Dispatchers.IO) {
             val control = sharedPreferences.getInt("control", 0)
             if (control == 0) {
                 val document = Jsoup.connect(URL).get()
-                mainFragmentViewModel.getData(document)
+                commonViewModel.getData(document)
                 // aşağıdakini 0 dan farklı bir değer yaparsan verileri sadece bir kere çeker.
                 // Burdan sonra database almalısın.
                 withContext(Dispatchers.Main) {
-                    mainFragmentViewModel.firstDataList.observe(viewLifecycleOwner) {
+                    commonViewModel.firstDataList.observe(viewLifecycleOwner) {
                         if (!it.isNullOrEmpty()) {
                             val tableList = ArrayList<String>()
                             val featuresList = listOf(
@@ -73,7 +74,7 @@ class MainFragment : Fragment() {
                                             if (index == dataList[i].length - 1) {
                                                 tableList.add(dataList[i])
                                                 categoryList.add(CategoryModel(dataList[i], i))
-                                                mainFragmentViewModel.addTitle(CategoryModel(dataList[i], i))
+                                                commonViewModel.addTitle(CategoryModel(dataList[i], i))
                                             }
                                         }
                                     }
@@ -173,7 +174,7 @@ class MainFragment : Fragment() {
                             }
                             // RoomDatabase'e ekleme işlemi
                             foodFeaturesList.forEach { foodFeatures ->
-                                mainFragmentViewModel.addFoodFeatures(foodFeatures)
+                                commonViewModel.addFoodFeatures(foodFeatures)
                             }
                         }
                     }
@@ -182,16 +183,16 @@ class MainFragment : Fragment() {
             }
         }
 
-        val foodFeaturesAdapter = FoodFeaturesRecyclerAdapter(mainFragmentViewModel)
+        foodFeaturesAdapter = FoodFeaturesRecyclerAdapter(commonViewModel)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = foodFeaturesAdapter
 
-        mainFragmentViewModel.readAllData.observe(viewLifecycleOwner) { foodFeatures ->
+        commonViewModel.readAllData.observe(viewLifecycleOwner) { foodFeatures ->
             foodFeaturesAdapter.setData(foodFeatures)
         }
 
-        mainFragmentViewModel.viewModelScope.launch(Dispatchers.IO) {
-            println("categorili ${mainFragmentViewModel.getCategoryWithData("ŞEKERLİ GIDALAR")}")
+        commonViewModel.viewModelScope.launch(Dispatchers.IO) {
+            println("categorili ${commonViewModel.getCategoryWithData("ŞEKERLİ GIDALAR")}")
         }
 
         return view
@@ -204,6 +205,13 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_addUpdateFragment)
         }
 
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                searchDatabase(p0.toString())
+            }
+        })
     }
 
     override fun onDestroyView() {
@@ -211,4 +219,12 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+        commonViewModel.searchDatabase(searchQuery).observe(this) { list ->
+            list.let {
+                foodFeaturesAdapter.setData(it)
+            }
+        }
+    }
 }

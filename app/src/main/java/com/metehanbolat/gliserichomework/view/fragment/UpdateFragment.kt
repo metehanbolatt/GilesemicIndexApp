@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentUpdateBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
+import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 
 class UpdateFragment : Fragment() {
 
@@ -19,7 +19,7 @@ class UpdateFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args by navArgs<UpdateFragmentArgs>()
-    private lateinit var mainFragmentViewModel : MainFragmentViewModel
+    private lateinit var commonViewModel : CommonViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +28,7 @@ class UpdateFragment : Fragment() {
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        mainFragmentViewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
+        commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
 
         binding.apply {
             foodName.setText(args.currentFoodFeatures.foodName)
@@ -62,7 +62,7 @@ class UpdateFragment : Fragment() {
         val category = binding.category.text.toString()
 
         val updatedFoodFeatures = FoodFeaturesModel(args.currentFoodFeatures.id, foodName, glycemicIndex, carbohydrates, calories, category)
-        mainFragmentViewModel.updateFoodFeatures(updatedFoodFeatures)
+        commonViewModel.updateFoodFeatures(updatedFoodFeatures)
         findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
 
     }

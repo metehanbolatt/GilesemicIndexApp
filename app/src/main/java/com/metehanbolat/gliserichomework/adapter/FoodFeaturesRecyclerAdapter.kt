@@ -9,9 +9,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.metehanbolat.gliserichomework.databinding.FoodFeaturesRowBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.view.fragment.MainFragmentDirections
-import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
+import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 
-class FoodFeaturesRecyclerAdapter(private val mainFragmentViewModel: MainFragmentViewModel): RecyclerView.Adapter<FoodFeaturesRecyclerAdapter.FoodFeaturesViewHolder>() {
+class FoodFeaturesRecyclerAdapter(private val commonViewModel: CommonViewModel): RecyclerView.Adapter<FoodFeaturesRecyclerAdapter.FoodFeaturesViewHolder>() {
 
     private var foodFeaturesList = emptyList<FoodFeaturesModel>()
 
@@ -37,7 +37,7 @@ class FoodFeaturesRecyclerAdapter(private val mainFragmentViewModel: MainFragmen
         holder.binding.deleteButton.setOnClickListener {
             AlertDialog.Builder(it.context).apply {
                 setPositiveButton("Delete") {_, _ ->
-                    mainFragmentViewModel.deleteFoodFeatures(currentItem)
+                    commonViewModel.deleteFoodFeatures(currentItem)
                     Snackbar.make(it, "${currentItem.foodName} was deleted.", Snackbar.LENGTH_SHORT).show()
                 }
                 setNegativeButton("Cancel") {_, _ -> }

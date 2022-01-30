@@ -11,14 +11,14 @@ import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentAddBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
+import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 
 class AddFragment : Fragment() {
 
     private var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var mainFragmentViewModel: MainFragmentViewModel
+    private lateinit var commonViewModel: CommonViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +27,7 @@ class AddFragment : Fragment() {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        mainFragmentViewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
+        commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
 
         return view
     }
@@ -52,7 +52,7 @@ class AddFragment : Fragment() {
         val calories = binding.calories.text.toString()
 
         val foodFeatures = FoodFeaturesModel(0, foodName, glycemicIndex, carbohydrates, calories, "deneme")
-        mainFragmentViewModel.addFoodFeatures(foodFeatures)
+        commonViewModel.addFoodFeatures(foodFeatures)
         Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_addUpdateFragment_to_mainFragment)
     }

@@ -20,6 +20,9 @@ interface FoodFeaturesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTitle(categoryModel: CategoryModel)
 
+    @Query("SELECT * FROM food_features WHERE foodName LIKE :searchQuery OR glycemicIndex LIKE :searchQuery OR carbohydrates LIKE :searchQuery OR calories LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String) : LiveData<List<FoodFeaturesModel>>
+
     @Query("SELECT * FROM food_features ORDER BY id ASC")
     fun readAllData(): LiveData<List<FoodFeaturesModel>>
 

@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.nodes.Document
 
-class MainFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class CommonViewModel(application: Application) : AndroidViewModel(application) {
 
     val firstDataList = MutableLiveData<ArrayList<String>>()
     val readAllData: LiveData<List<FoodFeaturesModel>>
@@ -57,6 +57,10 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateFoodFeatures(foodFeaturesModel)
         }
+    }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<FoodFeaturesModel>> {
+        return repository.searchDatabase(searchQuery)
     }
 
     fun deleteFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {

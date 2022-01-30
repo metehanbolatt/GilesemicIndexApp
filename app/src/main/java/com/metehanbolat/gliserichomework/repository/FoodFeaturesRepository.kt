@@ -22,6 +22,10 @@ class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
         foodFeaturesDao.deleteFoodFeatures(foodFeaturesModel)
     }
 
+    fun searchDatabase(searchQuery: String): LiveData<List<FoodFeaturesModel>> {
+        return foodFeaturesDao.searchDatabase(searchQuery)
+    }
+
     suspend fun addTitle(categoryModel: CategoryModel) {
         foodFeaturesDao.addTitle(categoryModel)
     }
