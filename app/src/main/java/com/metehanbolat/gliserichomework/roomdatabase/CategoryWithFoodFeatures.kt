@@ -1,9 +1,9 @@
-package com.metehanbolat.gliserichomework.roomrelations
+package com.metehanbolat.gliserichomework.roomdatabase
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.roommodel.CategoryModel
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.model.CategoryModel
 
 data class CategoryWithFoodFeatures(
     @Embedded val category: CategoryModel,

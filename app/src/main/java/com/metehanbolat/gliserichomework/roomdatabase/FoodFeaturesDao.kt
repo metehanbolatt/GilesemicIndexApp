@@ -1,16 +1,18 @@
-package com.metehanbolat.gliserichomework.roomdatabase.foodfeaturesdata
+package com.metehanbolat.gliserichomework.roomdatabase
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.roommodel.CategoryModel
-import com.metehanbolat.gliserichomework.roomrelations.CategoryWithFoodFeatures
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.model.CategoryModel
 
 @Dao
 interface FoodFeaturesDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFoodFeatures(foodFeaturesModel: FoodFeaturesModel)
+
+    @Update
+    suspend fun updateFoodFeatures(foodFeaturesModel: FoodFeaturesModel)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTitle(categoryModel: CategoryModel)

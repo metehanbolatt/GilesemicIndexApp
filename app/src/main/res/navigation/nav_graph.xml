@@ -13,14 +13,29 @@
         <action
             android:id="@+id/action_mainFragment_to_addUpdateFragment"
             app:destination="@id/addUpdateFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUpdateFragment"
-        android:name="com.metehanbolat.gliserichomework.view.fragment.AddUpdateFragment"
+        android:name="com.metehanbolat.gliserichomework.view.fragment.AddFragment"
         android:label="fragment_add_update"
-        tools:layout="@layout/fragment_add_update" >
+        tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addUpdateFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.metehanbolat.gliserichomework.view.fragment.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="currentFoodFeatures"
+            app:argType="com.metehanbolat.gliserichomework.model.FoodFeaturesModel" />
     </fragment>
 </navigation>

@@ -2,9 +2,11 @@ package com.metehanbolat.gliserichomework.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.metehanbolat.gliserichomework.databinding.FoodFeaturesRowBinding
-import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.view.fragment.MainFragmentDirections
 
 class FoodFeaturesRecyclerAdapter: RecyclerView.Adapter<FoodFeaturesRecyclerAdapter.FoodFeaturesViewHolder>() {
 
@@ -23,6 +25,11 @@ class FoodFeaturesRecyclerAdapter: RecyclerView.Adapter<FoodFeaturesRecyclerAdap
         holder.binding.glycemicIndex.text = currentItem.glycemicIndex
         holder.binding.carbohydrates.text = currentItem.carbohydrates
         holder.binding.calories.text = currentItem.calories
+
+        holder.binding.rowConstraint.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToUpdateFragment(currentItem)
+            it.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

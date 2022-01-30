@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.adapter.FoodFeaturesRecyclerAdapter
 import com.metehanbolat.gliserichomework.databinding.FragmentMainBinding
-import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.roommodel.CategoryModel
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.model.CategoryModel
 import com.metehanbolat.gliserichomework.utils.Constants.URL
 import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
 import kotlinx.coroutines.Dispatchers

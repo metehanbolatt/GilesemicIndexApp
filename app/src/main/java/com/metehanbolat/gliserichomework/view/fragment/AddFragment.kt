@@ -9,13 +9,13 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
-import com.metehanbolat.gliserichomework.databinding.FragmentAddUpdateBinding
-import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.databinding.FragmentAddBinding
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
 
-class AddUpdateFragment : Fragment() {
+class AddFragment : Fragment() {
 
-    private var _binding : FragmentAddUpdateBinding? = null
+    private var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var mainFragmentViewModel: MainFragmentViewModel
@@ -24,7 +24,7 @@ class AddUpdateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddUpdateBinding.inflate(inflater, container, false)
+        _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
 
         mainFragmentViewModel = ViewModelProvider(this)[MainFragmentViewModel::class.java]
@@ -35,7 +35,7 @@ class AddUpdateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.foodButton.setOnClickListener {
+        binding.addButton.setOnClickListener {
             insertDataToDatabase()
         }
     }

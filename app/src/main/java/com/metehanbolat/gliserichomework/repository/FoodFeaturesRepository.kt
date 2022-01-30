@@ -1,9 +1,10 @@
-package com.metehanbolat.gliserichomework.roomdatabase.foodfeaturesdata
+package com.metehanbolat.gliserichomework.repository
 
 import androidx.lifecycle.LiveData
-import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.roommodel.CategoryModel
-import com.metehanbolat.gliserichomework.roomrelations.CategoryWithFoodFeatures
+import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.model.CategoryModel
+import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesDao
+import com.metehanbolat.gliserichomework.roomdatabase.CategoryWithFoodFeatures
 
 class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
 
@@ -11,6 +12,10 @@ class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
 
     suspend fun addFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
         foodFeaturesDao.addFoodFeatures(foodFeaturesModel)
+    }
+
+    suspend fun updateFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
+        foodFeaturesDao.updateFoodFeatures(foodFeaturesModel)
     }
 
     suspend fun addTitle(categoryModel: CategoryModel) {
