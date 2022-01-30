@@ -59,6 +59,12 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
+    fun deleteFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteFoodFeatures(foodFeaturesModel)
+        }
+    }
+
 }
 
 fun <T> MutableLiveData<T>.notifyObserver() {

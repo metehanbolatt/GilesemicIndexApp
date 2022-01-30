@@ -18,6 +18,10 @@ class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
         foodFeaturesDao.updateFoodFeatures(foodFeaturesModel)
     }
 
+    suspend fun deleteFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
+        foodFeaturesDao.deleteFoodFeatures(foodFeaturesModel)
+    }
+
     suspend fun addTitle(categoryModel: CategoryModel) {
         foodFeaturesDao.addTitle(categoryModel)
     }

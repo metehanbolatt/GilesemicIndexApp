@@ -182,7 +182,7 @@ class MainFragment : Fragment() {
             }
         }
 
-        val foodFeaturesAdapter = FoodFeaturesRecyclerAdapter()
+        val foodFeaturesAdapter = FoodFeaturesRecyclerAdapter(mainFragmentViewModel)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = foodFeaturesAdapter
 

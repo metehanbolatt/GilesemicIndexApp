@@ -14,6 +14,9 @@ interface FoodFeaturesDao {
     @Update
     suspend fun updateFoodFeatures(foodFeaturesModel: FoodFeaturesModel)
 
+    @Delete
+    suspend fun deleteFoodFeatures(foodFeaturesModel: FoodFeaturesModel)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTitle(categoryModel: CategoryModel)
 
