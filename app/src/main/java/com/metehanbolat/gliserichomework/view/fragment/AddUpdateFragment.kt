@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentAddUpdateBinding
-import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.viewmodel.MainFragmentViewModel
 
 class AddUpdateFragment : Fragment() {
@@ -51,7 +51,7 @@ class AddUpdateFragment : Fragment() {
         val carbohydrates = binding.carbohydrates.text.toString()
         val calories = binding.calories.text.toString()
 
-        val foodFeatures = FoodFeaturesModel(0, foodName, glycemicIndex, carbohydrates, calories)
+        val foodFeatures = FoodFeaturesModel(0, foodName, glycemicIndex, carbohydrates, calories, "deneme")
         mainFragmentViewModel.addFoodFeatures(foodFeatures)
         Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_addUpdateFragment_to_mainFragment)

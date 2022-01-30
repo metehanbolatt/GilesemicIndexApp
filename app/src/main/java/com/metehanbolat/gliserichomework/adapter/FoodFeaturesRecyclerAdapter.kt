@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.metehanbolat.gliserichomework.databinding.FoodFeaturesRowBinding
-import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
 
 class FoodFeaturesRecyclerAdapter: RecyclerView.Adapter<FoodFeaturesRecyclerAdapter.FoodFeaturesViewHolder>() {
 

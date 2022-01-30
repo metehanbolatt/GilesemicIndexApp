@@ -3,8 +3,10 @@ package com.metehanbolat.gliserichomework.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesDatabase
-import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
-import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesRepository
+import com.metehanbolat.gliserichomework.roommodel.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.roomdatabase.foodfeaturesdata.FoodFeaturesRepository
+import com.metehanbolat.gliserichomework.roommodel.CategoryModel
+import com.metehanbolat.gliserichomework.roomrelations.CategoryWithFoodFeatures
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,6 +41,16 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
         viewModelScope.launch(Dispatchers.IO) {
             repository.addFoodFeatures(foodFeaturesModel)
         }
+    }
+
+    fun addTitle(categoryModel: CategoryModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addTitle(categoryModel)
+        }
+    }
+
+    suspend fun getCategoryWithData(category: String) : List<CategoryWithFoodFeatures> {
+        return repository.getTitleWithFoodFeatures(category)
     }
 
 }
