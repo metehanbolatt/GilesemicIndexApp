@@ -16,6 +16,8 @@ class CommonViewModel(application: Application) : AndroidViewModel(application) 
 
     val firstDataList = MutableLiveData<ArrayList<String>>()
     val readAllData: LiveData<List<FoodFeaturesModel>>
+    val readAllCategory: LiveData<List<CategoryModel>>
+
     private val repository: FoodFeaturesRepository
 
     suspend fun getData(document: Document) {
@@ -35,17 +37,12 @@ class CommonViewModel(application: Application) : AndroidViewModel(application) 
         val foodFeaturesDao = FoodFeaturesDatabase.getDatabase(application).foodFeaturesDao()
         repository = FoodFeaturesRepository(foodFeaturesDao)
         readAllData = repository.readAllData
+        readAllCategory = repository.readAllCategory
     }
 
     fun addFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addFoodFeatures(foodFeaturesModel)
-        }
-    }
-
-    fun addTitle(categoryModel: CategoryModel) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addTitle(categoryModel)
         }
     }
 
@@ -66,6 +63,12 @@ class CommonViewModel(application: Application) : AndroidViewModel(application) 
     fun deleteFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteFoodFeatures(foodFeaturesModel)
+        }
+    }
+
+    fun addCategory(categoryModel: CategoryModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addCategory(categoryModel)
         }
     }
 

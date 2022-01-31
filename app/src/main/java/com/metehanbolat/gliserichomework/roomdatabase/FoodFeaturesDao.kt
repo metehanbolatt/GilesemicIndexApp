@@ -18,9 +18,6 @@ interface FoodFeaturesDao {
     @Delete
     suspend fun deleteFoodFeatures(foodFeaturesModel: FoodFeaturesModel)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTitle(categoryModel: CategoryModel)
-
     @Query("SELECT * FROM food_features WHERE foodName LIKE :searchQuery OR glycemicIndex LIKE :searchQuery OR carbohydrates LIKE :searchQuery OR calories LIKE :searchQuery")
     fun searchDatabase(searchQuery: String) : LiveData<List<FoodFeaturesModel>>
 
@@ -30,5 +27,11 @@ interface FoodFeaturesDao {
     @Transaction
     @Query("SELECT * FROM food_features_category WHERE category = :category")
     suspend fun getCategoryWithFoodFeatures(category: String): List<CategoryWithFoodFeatures>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addCategory(categoryModel: CategoryModel)
+
+    @Query("SELECT * FROM food_features_category ORDER BY category ASC")
+    fun readAllCategories(): LiveData<List<CategoryModel>>
 
 }

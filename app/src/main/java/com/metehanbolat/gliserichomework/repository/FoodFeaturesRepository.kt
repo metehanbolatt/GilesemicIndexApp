@@ -9,6 +9,7 @@ import com.metehanbolat.gliserichomework.model.CategoryWithFoodFeatures
 class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
 
     val readAllData: LiveData<List<FoodFeaturesModel>> = foodFeaturesDao.readAllData()
+    val readAllCategory: LiveData<List<CategoryModel>> = foodFeaturesDao.readAllCategories()
 
     suspend fun addFoodFeatures(foodFeaturesModel: FoodFeaturesModel) {
         foodFeaturesDao.addFoodFeatures(foodFeaturesModel)
@@ -26,11 +27,11 @@ class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
         return foodFeaturesDao.searchDatabase(searchQuery)
     }
 
-    suspend fun addTitle(categoryModel: CategoryModel) {
-        foodFeaturesDao.addTitle(categoryModel)
-    }
-
     suspend fun getTitleWithFoodFeatures(category: String) : List<CategoryWithFoodFeatures>{
         return foodFeaturesDao.getCategoryWithFoodFeatures(category)
+    }
+
+    suspend fun addCategory(categoryModel: CategoryModel) {
+        foodFeaturesDao.addCategory(categoryModel)
     }
 }

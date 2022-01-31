@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentUpdateBinding
+import com.metehanbolat.gliserichomework.model.CategoryModel
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 
@@ -46,6 +48,16 @@ class UpdateFragment : Fragment() {
 
         binding.updateButton.setOnClickListener {
             updateItem()
+            addCategoryToDatabase()
+        }
+
+        commonViewModel.readAllCategory.observe(viewLifecycleOwner) { categoryModelList ->
+            val categoryList = arrayListOf<String>()
+            categoryModelList.forEach { categoryModel ->
+                categoryList.add(categoryModel.category)
+            }
+            val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categoryList)
+            binding.category.setAdapter(arrayAdapter)
         }
     }
 
@@ -64,7 +76,12 @@ class UpdateFragment : Fragment() {
         val updatedFoodFeatures = FoodFeaturesModel(args.currentFoodFeatures.id, foodName, glycemicIndex, carbohydrates, calories, category)
         commonViewModel.updateFoodFeatures(updatedFoodFeatures)
         findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
+    }
 
+    private fun addCategoryToDatabase() {
+        val category = binding.category.text.toString()
+        val categoryModel = CategoryModel(category, 999)
+        commonViewModel.addCategory(categoryModel)
     }
 
 }

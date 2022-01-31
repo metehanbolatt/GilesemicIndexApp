@@ -74,7 +74,7 @@ class MainFragment : Fragment() {
                                             if (index == dataList[i].length - 1) {
                                                 tableList.add(dataList[i])
                                                 categoryList.add(CategoryModel(dataList[i], i))
-                                                commonViewModel.addTitle(CategoryModel(dataList[i], i))
+                                                commonViewModel.addCategory(CategoryModel(dataList[i], i))
                                             }
                                         }
                                     }

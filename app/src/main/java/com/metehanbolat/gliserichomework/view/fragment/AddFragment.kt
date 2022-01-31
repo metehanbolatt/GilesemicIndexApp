@@ -1,15 +1,15 @@
 package com.metehanbolat.gliserichomework.view.fragment
 
 import android.os.Bundle
+import android.view.*
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentAddBinding
+import com.metehanbolat.gliserichomework.model.CategoryModel
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 
@@ -37,7 +37,18 @@ class AddFragment : Fragment() {
 
         binding.addButton.setOnClickListener {
             insertDataToDatabase()
+            insertCategoryToDatabase()
         }
+
+        commonViewModel.readAllCategory.observe(viewLifecycleOwner) { categoryModelList ->
+            val categoryList = arrayListOf<String>()
+            categoryModelList.forEach { categoryModel ->
+                categoryList.add(categoryModel.category)
+            }
+            val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categoryList)
+            binding.category.setAdapter(arrayAdapter)
+        }
+
     }
 
     override fun onDestroyView() {
@@ -50,11 +61,18 @@ class AddFragment : Fragment() {
         val glycemicIndex = binding.glycemicIndex.text.toString()
         val carbohydrates = binding.carbohydrates.text.toString()
         val calories = binding.calories.text.toString()
+        val category = binding.category.text.toString()
 
-        val foodFeatures = FoodFeaturesModel(0, foodName, glycemicIndex, carbohydrates, calories, "deneme")
+        val foodFeatures = FoodFeaturesModel(0, foodName, glycemicIndex, carbohydrates, calories, category)
         commonViewModel.addFoodFeatures(foodFeatures)
         Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_addUpdateFragment_to_mainFragment)
+    }
+
+    private fun insertCategoryToDatabase() {
+        val category = binding.category.text.toString()
+        val categoryModel = CategoryModel(category, 999)
+        commonViewModel.addCategory(categoryModel)
     }
 
 }
