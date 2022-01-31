@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.model.CategoryModel
+import com.metehanbolat.gliserichomework.model.CategoryWithFoodFeatures
 
 @Dao
 interface FoodFeaturesDao {

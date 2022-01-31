@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.model.CategoryModel
 import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesDao
-import com.metehanbolat.gliserichomework.roomdatabase.CategoryWithFoodFeatures
+import com.metehanbolat.gliserichomework.model.CategoryWithFoodFeatures
 
 class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
 

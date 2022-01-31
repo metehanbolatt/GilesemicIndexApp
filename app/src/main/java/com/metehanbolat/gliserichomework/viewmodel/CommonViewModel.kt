@@ -6,7 +6,7 @@ import com.metehanbolat.gliserichomework.roomdatabase.FoodFeaturesDatabase
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.repository.FoodFeaturesRepository
 import com.metehanbolat.gliserichomework.model.CategoryModel
-import com.metehanbolat.gliserichomework.roomdatabase.CategoryWithFoodFeatures
+import com.metehanbolat.gliserichomework.model.CategoryWithFoodFeatures
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

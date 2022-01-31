@@ -1,4 +1,4 @@
-package com.metehanbolat.gliserichomework.roomdatabase
+package com.metehanbolat.gliserichomework.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
