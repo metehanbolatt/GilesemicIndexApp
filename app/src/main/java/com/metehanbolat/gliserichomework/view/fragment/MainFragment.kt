@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.metehanbolat.gliserichomework.R
+import com.metehanbolat.gliserichomework.adapter.CategoryRecyclerAdapter
 import com.metehanbolat.gliserichomework.adapter.FoodFeaturesRecyclerAdapter
 import com.metehanbolat.gliserichomework.databinding.FragmentMainBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
@@ -30,6 +31,7 @@ class MainFragment : Fragment() {
     private lateinit var commonViewModel : CommonViewModel
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var foodFeaturesAdapter: FoodFeaturesRecyclerAdapter
+    private lateinit var categoryAdapter: CategoryRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,73 +105,76 @@ class MainFragment : Fragment() {
                                     3 -> caloriesList.add(data)
                                 }
                             }
+                            // Kategorilere ayırma işlemi
                             val foodFeaturesList = ArrayList<FoodFeaturesModel>()
                             for (i in 0 until foodNameList.size) {
-                                // 0 dan 46'ya toplam 47 data
-                                if (i < ((((categoryList[1].index) - 1) / 4) - 1)) {
-                                    val foodFeatures = FoodFeaturesModel(
-                                        0,
-                                        foodNameList[i],
-                                        glycemicIndexList[i],
-                                        carbohydratesList[i],
-                                        caloriesList[i],
-                                        categoryList[0].category
-                                    )
-                                    foodFeaturesList.add(foodFeatures)
-                                // 47 den 57'ye toplam 11 data
-                                }else if (i < ((((categoryList[2].index) - 2) / 4) - 2)) {
-                                    val foodFeatures = FoodFeaturesModel(
-                                        0,
-                                        foodNameList[i],
-                                        glycemicIndexList[i],
-                                        carbohydratesList[i],
-                                        caloriesList[i],
-                                        categoryList[1].category
-                                    )
-                                    foodFeaturesList.add(foodFeatures)
-                                // 58'den 82'ye toplam 25 data
-                                }else if(i < ((((categoryList[3].index) - 3) / 4) - 3)) {
-                                    val foodFeatures = FoodFeaturesModel(
-                                        0,
-                                        foodNameList[i],
-                                        glycemicIndexList[i],
-                                        carbohydratesList[i],
-                                        caloriesList[i],
-                                        categoryList[2].category
-                                    )
-                                    foodFeaturesList.add(foodFeatures)
-                                // 83'ten 94'e toplam 12 data
-                                }else if (i < ((((categoryList[4].index) - 4) / 4) - 4)) {
-                                    val foodFeatures = FoodFeaturesModel(
-                                        0,
-                                        foodNameList[i],
-                                        glycemicIndexList[i],
-                                        carbohydratesList[i],
-                                        caloriesList[i],
-                                        categoryList[3].category
-                                    )
-                                    foodFeaturesList.add(foodFeatures)
-                                // 95'ten 98'e kadar toplam 4 data
-                                }else if (i < ((((categoryList[5].index) - 5) / 4) - 5)) {
-                                    val foodFeatures = FoodFeaturesModel(
-                                        0,
-                                        foodNameList[i],
-                                        glycemicIndexList[i],
-                                        carbohydratesList[i],
-                                        caloriesList[i],
-                                        categoryList[4].category
-                                    )
-                                    foodFeaturesList.add(foodFeatures)
-                                }else{
-                                    val foodFeatures = FoodFeaturesModel(
-                                        0,
-                                        foodNameList[i],
-                                        glycemicIndexList[i],
-                                        carbohydratesList[i],
-                                        caloriesList[i],
-                                        categoryList[5].category
-                                    )
-                                    foodFeaturesList.add(foodFeatures)
+                                when {
+                                    i < ((((categoryList[1].index) - 1) / 4) - 1) -> {
+                                        val foodFeatures = FoodFeaturesModel(
+                                            0,
+                                            foodNameList[i],
+                                            glycemicIndexList[i],
+                                            carbohydratesList[i],
+                                            caloriesList[i],
+                                            categoryList[0].category
+                                        )
+                                        foodFeaturesList.add(foodFeatures)
+                                    }
+                                    i < ((((categoryList[2].index) - 2) / 4) - 2) -> {
+                                        val foodFeatures = FoodFeaturesModel(
+                                            0,
+                                            foodNameList[i],
+                                            glycemicIndexList[i],
+                                            carbohydratesList[i],
+                                            caloriesList[i],
+                                            categoryList[1].category
+                                        )
+                                        foodFeaturesList.add(foodFeatures)
+                                    }
+                                    i < ((((categoryList[3].index) - 3) / 4) - 3) -> {
+                                        val foodFeatures = FoodFeaturesModel(
+                                            0,
+                                            foodNameList[i],
+                                            glycemicIndexList[i],
+                                            carbohydratesList[i],
+                                            caloriesList[i],
+                                            categoryList[2].category
+                                        )
+                                        foodFeaturesList.add(foodFeatures)
+                                    }
+                                    i < ((((categoryList[4].index) - 4) / 4) - 4) -> {
+                                        val foodFeatures = FoodFeaturesModel(
+                                            0,
+                                            foodNameList[i],
+                                            glycemicIndexList[i],
+                                            carbohydratesList[i],
+                                            caloriesList[i],
+                                            categoryList[3].category
+                                        )
+                                        foodFeaturesList.add(foodFeatures)
+                                    }
+                                    i < ((((categoryList[5].index) - 5) / 4) - 5) -> {
+                                        val foodFeatures = FoodFeaturesModel(
+                                            0,
+                                            foodNameList[i],
+                                            glycemicIndexList[i],
+                                            carbohydratesList[i],
+                                            caloriesList[i],
+                                            categoryList[4].category
+                                        )
+                                        foodFeaturesList.add(foodFeatures)
+                                    }
+                                    else -> {
+                                        val foodFeatures = FoodFeaturesModel(
+                                            0,
+                                            foodNameList[i],
+                                            glycemicIndexList[i],
+                                            carbohydratesList[i],
+                                            caloriesList[i],
+                                            categoryList[5].category
+                                        )
+                                        foodFeaturesList.add(foodFeatures)
+                                    }
                                 }
                             }
                             // RoomDatabase'e ekleme işlemi
@@ -187,12 +192,21 @@ class MainFragment : Fragment() {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = foodFeaturesAdapter
 
+        commonViewModel.readAllCategory.observe(viewLifecycleOwner) {
+            categoryAdapter = CategoryRecyclerAdapter(it, commonViewModel)
+            val categoryRecyclerView = binding.categoryRecyclerView
+            categoryRecyclerView.adapter = categoryAdapter
+        }
+
         commonViewModel.readAllData.observe(viewLifecycleOwner) { foodFeatures ->
             foodFeaturesAdapter.setData(foodFeatures)
         }
 
-        commonViewModel.viewModelScope.launch(Dispatchers.IO) {
-            println("categorili ${commonViewModel.getCategoryWithData("ŞEKERLİ GIDALAR")}")
+        commonViewModel.categoryControl.observe(viewLifecycleOwner){ category ->
+            commonViewModel.viewModelScope.launch(Dispatchers.Main) {
+               foodFeaturesAdapter.setData(commonViewModel.getCategoryWithData(category)[0].foodFeatures)
+               //println("categorili ${commonViewModel.getCategoryWithData(category)}")
+            }
         }
 
         return view
