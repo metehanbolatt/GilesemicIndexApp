@@ -3,14 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:textColor="@color/white"
-        android:text="ASDFASDF"/>
+        android:background="@drawable/category_text_view_background"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:textSize="12sp"
+        android:text="Yemekler"/>
 
 </LinearLayout>

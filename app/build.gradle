@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -43,6 +43,7 @@ dependencies {
     def nav_version = "2.5.0-alpha01"
     def lifecycle_version = "2.5.0-alpha01"
     def room_version = "2.4.1"
+    def lottieVersion = "4.2.1"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -79,5 +80,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
 }

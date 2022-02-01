@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -41,7 +42,7 @@ class MainFragment : Fragment() {
         val view = binding.root
 
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
-
+0
         sharedPreferences = this.requireActivity().getSharedPreferences("com.metehanbolat.gliserichomework", Context.MODE_PRIVATE)
 
         commonViewModel.viewModelScope.launch(Dispatchers.IO) {
@@ -192,7 +193,7 @@ class MainFragment : Fragment() {
         recyclerView.adapter = foodFeaturesAdapter
 
         commonViewModel.readAllCategory.observe(viewLifecycleOwner) {
-            categoryAdapter = CategoryRecyclerAdapter(it, commonViewModel)
+            categoryAdapter = CategoryRecyclerAdapter(it as ArrayList<CategoryModel>, commonViewModel)
             val categoryRecyclerView = binding.categoryRecyclerView
             categoryRecyclerView.adapter = categoryAdapter
         }
@@ -204,7 +205,6 @@ class MainFragment : Fragment() {
         commonViewModel.categoryControl.observe(viewLifecycleOwner){ category ->
             commonViewModel.viewModelScope.launch(Dispatchers.Main) {
                foodFeaturesAdapter.setData(commonViewModel.getCategoryWithData(category)[0].foodFeatures)
-               //println("categorili ${commonViewModel.getCategoryWithData(category)}")
             }
         }
 

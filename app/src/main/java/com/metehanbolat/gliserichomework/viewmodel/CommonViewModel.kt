@@ -73,6 +73,18 @@ class CommonViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun deleteCategory(categoryModel: CategoryModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteCategory(categoryModel)
+        }
+    }
+
+    fun deleteFoodFeaturesWithCategory(category: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteFoodFeaturesWithCategory(category)
+        }
+    }
+
 }
 
 fun <T> MutableLiveData<T>.notifyObserver() {

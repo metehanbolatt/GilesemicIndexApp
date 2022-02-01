@@ -34,4 +34,12 @@ class FoodFeaturesRepository(private val foodFeaturesDao: FoodFeaturesDao) {
     suspend fun addCategory(categoryModel: CategoryModel) {
         foodFeaturesDao.addCategory(categoryModel)
     }
+
+    suspend fun deleteCategory(categoryModel: CategoryModel) {
+        foodFeaturesDao.deleteCategory(categoryModel)
+    }
+
+    suspend fun deleteFoodFeaturesWithCategory(category: String) {
+        foodFeaturesDao.deleteFoodFeaturesWithCategory(category)
+    }
 }

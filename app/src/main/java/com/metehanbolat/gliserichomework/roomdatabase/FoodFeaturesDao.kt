@@ -31,6 +31,12 @@ interface FoodFeaturesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addCategory(categoryModel: CategoryModel)
 
+    @Delete
+    suspend fun deleteCategory(categoryModel: CategoryModel)
+
+    @Query("DELETE FROM food_features WHERE category = :category")
+    suspend fun deleteFoodFeaturesWithCategory(category: String)
+
     @Query("SELECT * FROM food_features_category ORDER BY category ASC")
     fun readAllCategories(): LiveData<List<CategoryModel>>
 
