@@ -49,8 +49,7 @@ class MainFragment : Fragment() {
             if (control == 0) {
                 val document = Jsoup.connect(URL).get()
                 commonViewModel.getData(document)
-                // aşağıdakini 0 dan farklı bir değer yaparsan verileri sadece bir kere çeker.
-                // Burdan sonra database almalısın.
+                // Control parametresi ile birlikte çekme işlemi sadece bir kere yapılıyor.
                 withContext(Dispatchers.Main) {
                     commonViewModel.firstDataList.observe(viewLifecycleOwner) {
                         if (!it.isNullOrEmpty()) {
