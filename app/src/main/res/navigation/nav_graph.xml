@@ -38,4 +38,14 @@
             android:name="currentFoodFeatures"
             app:argType="com.metehanbolat.gliserichomework.model.FoodFeaturesModel" />
     </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.metehanbolat.gliserichomework.view.fragment.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.metehanbolat.gliserichomework.view.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

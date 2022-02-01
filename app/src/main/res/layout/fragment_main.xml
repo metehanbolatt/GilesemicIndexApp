@@ -55,6 +55,7 @@
         android:src="@drawable/ic_add"
         android:layout_margin="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/add_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
