@@ -85,6 +85,10 @@ class CommonViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    suspend fun getFavouriteFoodFeatures(): List<FoodFeaturesModel> {
+        return repository.getFavouriteFoodFeatures()
+    }
+
 }
 
 fun <T> MutableLiveData<T>.notifyObserver() {

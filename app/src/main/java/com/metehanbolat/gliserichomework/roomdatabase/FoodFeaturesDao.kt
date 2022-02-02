@@ -40,4 +40,7 @@ interface FoodFeaturesDao {
     @Query("SELECT * FROM food_features_category ORDER BY category ASC")
     fun readAllCategories(): LiveData<List<CategoryModel>>
 
+    @Query("SELECT * FROM food_features WHERE favourite = 1")
+    suspend fun getFavouriteFoodFeatures(): List<FoodFeaturesModel>
+
 }
