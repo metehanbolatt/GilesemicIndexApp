@@ -7,13 +7,16 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FoodFeaturesRowBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.view.fragment.MainFragmentDirections
 import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 
-class FoodFeaturesRecyclerAdapter(private val commonViewModel: CommonViewModel): RecyclerView.Adapter<FoodFeaturesRecyclerAdapter.FoodFeaturesViewHolder>() {
+class FoodFeaturesRecyclerAdapter(private val commonViewModel: CommonViewModel, private var firebase: Firebase): RecyclerView.Adapter<FoodFeaturesRecyclerAdapter.FoodFeaturesViewHolder>() {
 
     private var foodFeaturesList = emptyList<FoodFeaturesModel>()
 
@@ -25,6 +28,9 @@ class FoodFeaturesRecyclerAdapter(private val commonViewModel: CommonViewModel):
     }
 
     override fun onBindViewHolder(holder: FoodFeaturesViewHolder, position: Int) {
+        val auth = firebase.auth
+        val firestore = firebase.firestore
+        val currentUser = auth.currentUser?.email!!
         val currentItem = foodFeaturesList[position]
         holder.binding.foodName.text = currentItem.foodName
         holder.binding.glycemicIndex.text = currentItem.glycemicIndex
@@ -35,6 +41,28 @@ class FoodFeaturesRecyclerAdapter(private val commonViewModel: CommonViewModel):
             holder.binding.favouriteImage.setImageDrawable(ContextCompat.getDrawable(holder.binding.root.context, R.drawable.ic_red_favourite))
         } else {
             holder.binding.favouriteImage.setImageDrawable(ContextCompat.getDrawable(holder.binding.root.context, R.drawable.ic_red_favourite_border))
+        }
+
+        holder.binding.favouriteImage.setOnClickListener {
+            if (currentItem.favourite == 1) {
+                holder.binding.favouriteImage.setImageDrawable(ContextCompat.getDrawable(holder.binding.root.context, R.drawable.ic_red_favourite_border))
+                commonViewModel.updateFoodFeatures(FoodFeaturesModel(currentItem.id, currentItem.foodName, currentItem.glycemicIndex, currentItem.carbohydrates, currentItem.calories, currentItem.category, 0))
+                firestore.collection(currentUser).document("favourite").collection("favourite").document(currentItem.id.toString()).delete()
+            }else {
+                holder.binding.favouriteImage.setImageDrawable(ContextCompat.getDrawable(holder.binding.root.context, R.drawable.ic_red_favourite))
+                commonViewModel.updateFoodFeatures(FoodFeaturesModel(currentItem.id, currentItem.foodName, currentItem.glycemicIndex, currentItem.carbohydrates, currentItem.calories, currentItem.category, 1))
+                val data = hashMapOf(
+                    "id" to currentItem.id,
+                    "name" to currentItem.foodName,
+                    "glycemicIndex" to currentItem.glycemicIndex,
+                    "carbohydrates" to currentItem.carbohydrates,
+                    "calories" to currentItem.calories,
+                    "category" to currentItem.category,
+                    "favourite" to 1
+                )
+                firestore.collection(currentUser).document("favourite").set(hashMapOf("favourite" to "1"))
+                firestore.collection(currentUser).document("favourite").collection("favourite").document(currentItem.id.toString()).set(data)
+            }
         }
 
         when(currentItem.glycemicIndex.toInt()) {

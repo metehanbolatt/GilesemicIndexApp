@@ -24,11 +24,11 @@ class EntranceActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        object : CountDownTimer(3000, 1000) {
+        object : CountDownTimer(1000, 1000) {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
                 val currentUser = auth.currentUser
-                if (currentUser != null) {
+                if (currentUser == null) {
                     Intent(this@EntranceActivity, LoginActivity::class.java).apply {
                         startActivity(this)
                         finish()

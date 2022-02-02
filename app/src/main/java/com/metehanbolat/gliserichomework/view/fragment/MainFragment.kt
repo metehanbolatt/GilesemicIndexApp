@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.ktx.Firebase
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.adapter.CategoryRecyclerAdapter
 import com.metehanbolat.gliserichomework.adapter.FoodFeaturesRecyclerAdapter
@@ -32,6 +33,7 @@ class MainFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var foodFeaturesAdapter: FoodFeaturesRecyclerAdapter
     private lateinit var categoryAdapter: CategoryRecyclerAdapter
+    private lateinit var firebase: Firebase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +43,8 @@ class MainFragment : Fragment() {
         val view = binding.root
 
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
-
         sharedPreferences = this.requireActivity().getSharedPreferences("com.metehanbolat.gliserichomework", Context.MODE_PRIVATE)
+        firebase = Firebase
 
         commonViewModel.viewModelScope.launch(Dispatchers.IO) {
             val control = sharedPreferences.getInt("control", 0)
@@ -193,7 +195,7 @@ class MainFragment : Fragment() {
             }
         }
 
-        foodFeaturesAdapter = FoodFeaturesRecyclerAdapter(commonViewModel)
+        foodFeaturesAdapter = FoodFeaturesRecyclerAdapter(commonViewModel, firebase)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = foodFeaturesAdapter
 

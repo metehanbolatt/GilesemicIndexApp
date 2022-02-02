@@ -35,7 +35,7 @@ class FavouriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.viewModelScope.launch(Dispatchers.IO) {
-            println(viewModel.getFavouriteFoodFeatures())
+            //println(viewModel.getFavouriteFoodFeatures())
         }
 
     }

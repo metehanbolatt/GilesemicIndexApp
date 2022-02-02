@@ -9,6 +9,11 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentUpdateBinding
 import com.metehanbolat.gliserichomework.model.CategoryModel
@@ -20,6 +25,9 @@ class UpdateFragment : Fragment() {
     private var _binding : FragmentUpdateBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     private val args by navArgs<UpdateFragmentArgs>()
     private lateinit var commonViewModel : CommonViewModel
 
@@ -30,6 +38,8 @@ class UpdateFragment : Fragment() {
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        auth = Firebase.auth
+        firestore = Firebase.firestore
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
 
         binding.apply {
@@ -74,6 +84,23 @@ class UpdateFragment : Fragment() {
         val calories = binding.calories.text.toString()
         val category = binding.category.text.toString().uppercase()
         val favourite = if (binding.favouriteControl.isChecked) 1 else 0
+
+        val data = hashMapOf(
+            "id" to args.currentFoodFeatures.id,
+            "name" to foodName,
+            "glycemicIndex" to glycemicIndex,
+            "carbohydrates" to carbohydrates,
+            "calories" to calories,
+            "category" to category,
+            "favourite" to favourite
+        )
+
+        if (favourite == 1) {
+            firestore.collection(auth.currentUser?.email!!).document("favourite").set(hashMapOf("favourite" to "1"))
+            firestore.collection(auth.currentUser?.email!!).document("favourite").collection("favourite").document(args.currentFoodFeatures.id.toString()).set(data)
+        }else{
+            firestore.collection(auth.currentUser?.email!!).document("favourite").collection("favourite").document(args.currentFoodFeatures.id.toString()).delete()
+        }
 
         val updatedFoodFeatures = FoodFeaturesModel(args.currentFoodFeatures.id, foodName, glycemicIndex, carbohydrates, calories, category, favourite)
         commonViewModel.updateFoodFeatures(updatedFoodFeatures)

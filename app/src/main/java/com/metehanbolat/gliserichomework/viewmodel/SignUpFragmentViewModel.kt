@@ -36,11 +36,6 @@ class SignUpFragmentViewModel : ViewModel() {
             "email" to email,
             "password" to password
         )
-        database.collection(email).document("userData").set(userData).addOnSuccessListener {
-            println("Eklendi")
-        }.addOnFailureListener {
-            println("Eklenemedi")
-        }
-
+        database.collection(email).document("userData").set(userData)
     }
 }
