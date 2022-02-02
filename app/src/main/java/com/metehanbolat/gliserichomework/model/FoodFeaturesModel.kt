@@ -14,5 +14,6 @@ data class FoodFeaturesModel(
     val glycemicIndex: String,
     val carbohydrates: String,
     val calories: String,
-    val category: String
+    val category: String,
+    val favourite: Int
 ) : Parcelable

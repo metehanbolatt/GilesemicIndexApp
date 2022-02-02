@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.activity.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -29,6 +30,8 @@
         android:elevation="2dp"
         android:background="#fff"
         app:menu="@menu/bottom_nav_menu"
+        app:itemTextColor="#494949"
+        app:itemIconTint="#494949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

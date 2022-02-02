@@ -61,9 +61,11 @@ class AddFragment : Fragment() {
         val glycemicIndex = binding.glycemicIndex.text.toString()
         val carbohydrates = binding.carbohydrates.text.toString()
         val calories = binding.calories.text.toString()
-        val category = binding.category.text.toString()
+        val category = binding.category.text.toString().uppercase()
+        val favourite = if (binding.favouriteControl.isChecked) 1 else 0
 
-        val foodFeatures = FoodFeaturesModel(0, foodName, glycemicIndex, carbohydrates, calories, category)
+
+        val foodFeatures = FoodFeaturesModel(0, foodName, glycemicIndex, carbohydrates, calories, category, favourite)
         commonViewModel.addFoodFeatures(foodFeatures)
         Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_addUpdateFragment_to_mainFragment)

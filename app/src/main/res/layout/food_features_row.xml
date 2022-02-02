@@ -1,50 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/rowConstraint"
+<LinearLayout android:id="@+id/rowConstraint"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="#C8C8C8"
-    android:orientation="vertical">
+    android:layout_margin="10dp"
+    android:background="@drawable/food_features_background"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp">
+
         <TextView
             android:id="@+id/foodName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Kayısı" />
-
-        <ImageView
-            android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"
-            android:elevation="2dp"
-            android:src="@drawable/ic_delete" />
+            android:layout_gravity="center"
+            android:fontFamily="@font/gotham_bold"
+            android:textColor="#AA00FF"
+            android:maxLines="1"
+            android:maxLength="17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/favouriteImage"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_red_favourite_border"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/indexImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/a_0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/glycemicIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gotham_bold"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@id/indexImage"
+            app:layout_constraintEnd_toEndOf="@id/indexImage"
+            app:layout_constraintTop_toTopOf="@id/indexImage"
+            app:layout_constraintBottom_toBottomOf="@id/indexImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Glycemic Index"
+            android:fontFamily="@font/gotham_bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="2dp"
+            app:layout_constraintTop_toBottomOf="@id/indexImage"
+            app:layout_constraintStart_toStartOf="@id/indexImage"
+            app:layout_constraintEnd_toEndOf="@id/indexImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/carbohydrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#DD2C00"
+                android:layout_gravity="center"
+                android:fontFamily="@font/gotham_bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_bold"
+                android:text="Carbohydrate" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/calorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#DD2C00"
+                android:layout_gravity="center"
+                android:fontFamily="@font/gotham_bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_bold"
+                android:text="Calorie" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/glycemicIndex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="24" />
-    <TextView
-        android:id="@+id/carbohydrates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="32" />
-    <TextView
-        android:id="@+id/calories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="321" />
-
 </LinearLayout>

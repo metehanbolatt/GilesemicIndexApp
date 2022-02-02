@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -42,7 +41,7 @@ class MainFragment : Fragment() {
         val view = binding.root
 
         commonViewModel = ViewModelProvider(this)[CommonViewModel::class.java]
-0
+
         sharedPreferences = this.requireActivity().getSharedPreferences("com.metehanbolat.gliserichomework", Context.MODE_PRIVATE)
 
         commonViewModel.viewModelScope.launch(Dispatchers.IO) {
@@ -116,7 +115,8 @@ class MainFragment : Fragment() {
                                             glycemicIndexList[i],
                                             carbohydratesList[i],
                                             caloriesList[i],
-                                            categoryList[0].category
+                                            categoryList[0].category,
+                                            0
                                         )
                                         foodFeaturesList.add(foodFeatures)
                                     }
@@ -127,7 +127,8 @@ class MainFragment : Fragment() {
                                             glycemicIndexList[i],
                                             carbohydratesList[i],
                                             caloriesList[i],
-                                            categoryList[1].category
+                                            categoryList[1].category,
+                                            0
                                         )
                                         foodFeaturesList.add(foodFeatures)
                                     }
@@ -138,7 +139,8 @@ class MainFragment : Fragment() {
                                             glycemicIndexList[i],
                                             carbohydratesList[i],
                                             caloriesList[i],
-                                            categoryList[2].category
+                                            categoryList[2].category,
+                                            0
                                         )
                                         foodFeaturesList.add(foodFeatures)
                                     }
@@ -149,7 +151,8 @@ class MainFragment : Fragment() {
                                             glycemicIndexList[i],
                                             carbohydratesList[i],
                                             caloriesList[i],
-                                            categoryList[3].category
+                                            categoryList[3].category,
+                                            0
                                         )
                                         foodFeaturesList.add(foodFeatures)
                                     }
@@ -160,7 +163,8 @@ class MainFragment : Fragment() {
                                             glycemicIndexList[i],
                                             carbohydratesList[i],
                                             caloriesList[i],
-                                            categoryList[4].category
+                                            categoryList[4].category,
+                                            0
                                         )
                                         foodFeaturesList.add(foodFeatures)
                                     }
@@ -171,7 +175,8 @@ class MainFragment : Fragment() {
                                             glycemicIndexList[i],
                                             carbohydratesList[i],
                                             caloriesList[i],
-                                            categoryList[5].category
+                                            categoryList[5].category,
+                                            0
                                         )
                                         foodFeaturesList.add(foodFeatures)
                                     }

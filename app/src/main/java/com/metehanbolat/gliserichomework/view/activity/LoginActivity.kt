@@ -17,7 +17,4 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 }

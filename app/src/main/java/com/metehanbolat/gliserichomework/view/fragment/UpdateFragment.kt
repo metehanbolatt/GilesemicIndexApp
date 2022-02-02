@@ -38,6 +38,7 @@ class UpdateFragment : Fragment() {
             carbohydrates.setText(args.currentFoodFeatures.carbohydrates)
             calories.setText(args.currentFoodFeatures.calories)
             category.setText(args.currentFoodFeatures.category)
+            favouriteControl.isChecked = args.currentFoodFeatures.favourite == 1
         }
 
         return view
@@ -71,9 +72,10 @@ class UpdateFragment : Fragment() {
         val glycemicIndex = binding.glycemicIndex.text.toString()
         val carbohydrates = binding.carbohydrates.text.toString()
         val calories = binding.calories.text.toString()
-        val category = binding.category.text.toString()
+        val category = binding.category.text.toString().uppercase()
+        val favourite = if (binding.favouriteControl.isChecked) 1 else 0
 
-        val updatedFoodFeatures = FoodFeaturesModel(args.currentFoodFeatures.id, foodName, glycemicIndex, carbohydrates, calories, category)
+        val updatedFoodFeatures = FoodFeaturesModel(args.currentFoodFeatures.id, foodName, glycemicIndex, carbohydrates, calories, category, favourite)
         commonViewModel.updateFoodFeatures(updatedFoodFeatures)
         findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
     }
