@@ -200,7 +200,12 @@ class MainFragment : Fragment() {
         recyclerView.adapter = foodFeaturesAdapter
 
         commonViewModel.readAllCategory.observe(viewLifecycleOwner) {
-            categoryAdapter = CategoryRecyclerAdapter(it as ArrayList<CategoryModel>, commonViewModel)
+            val categoryArrayList = ArrayList<CategoryModel>()
+            categoryArrayList.add(0, CategoryModel("Hepsi", 999))
+            it.forEach { categories ->
+                categoryArrayList.add(categories)
+            }
+            categoryAdapter = CategoryRecyclerAdapter(categoryArrayList, commonViewModel)
             val categoryRecyclerView = binding.categoryRecyclerView
             categoryRecyclerView.adapter = categoryAdapter
         }
@@ -211,7 +216,13 @@ class MainFragment : Fragment() {
 
         commonViewModel.categoryControl.observe(viewLifecycleOwner){ category ->
             commonViewModel.viewModelScope.launch(Dispatchers.Main) {
-               foodFeaturesAdapter.setData(commonViewModel.getCategoryWithData(category)[0].foodFeatures)
+                if (category == "Hepsi") {
+                    commonViewModel.readAllData.observe(viewLifecycleOwner) { foodFeatures ->
+                        foodFeaturesAdapter.setData(foodFeatures)
+                    }
+                }else {
+                    foodFeaturesAdapter.setData(commonViewModel.getCategoryWithData(category)[0].foodFeatures)
+                }
             }
         }
 

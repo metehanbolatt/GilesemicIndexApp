@@ -42,7 +42,11 @@
         android:id="@+id/favouriteFragment"
         android:name="com.metehanbolat.gliserichomework.view.fragment.FavouriteFragment"
         android:label="fragment_favourite"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.metehanbolat.gliserichomework.view.fragment.ProfileFragment"
