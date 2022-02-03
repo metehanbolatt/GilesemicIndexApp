@@ -13,7 +13,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
-        setTheme(R.style.Theme_GlisericHomeWork)
         setContentView(view)
     }
 

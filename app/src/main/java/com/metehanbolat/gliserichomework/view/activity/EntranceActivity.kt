@@ -19,12 +19,11 @@ class EntranceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEntranceBinding.inflate(layoutInflater)
         val view = binding.root
-        setTheme(R.style.Theme_GlisericHomeWork)
         setContentView(view)
 
         auth = Firebase.auth
 
-        object : CountDownTimer(1000, 1000) {
+        object : CountDownTimer(2400, 1000) {
             override fun onTick(p0: Long) {}
             override fun onFinish() {
                 val currentUser = auth.currentUser
