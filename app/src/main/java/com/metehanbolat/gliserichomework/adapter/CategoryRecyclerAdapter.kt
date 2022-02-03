@@ -1,9 +1,11 @@
 package com.metehanbolat.gliserichomework.adapter
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.metehanbolat.gliserichomework.databinding.CategoryRowBinding
 import com.metehanbolat.gliserichomework.model.CategoryModel
 import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
@@ -29,10 +31,19 @@ class CategoryRecyclerAdapter(private val categoryList: ArrayList<CategoryModel>
         }
 
         holder.binding.category.setOnLongClickListener {
-            viewModel.deleteCategory(currentItem)
-            viewModel.deleteFoodFeaturesWithCategory(currentItem.category)
-            categoryList.removeAt(position)
-            notifyDataSetChanged()
+            AlertDialog.Builder(it.context).apply {
+                setPositiveButton("Delete") {_, _ ->
+                    viewModel.deleteCategory(currentItem)
+                    viewModel.deleteFoodFeaturesWithCategory(currentItem.category)
+                    categoryList.removeAt(position)
+                    notifyDataSetChanged()
+                    Snackbar.make(it, "${currentItem.category} was deleted.", Snackbar.LENGTH_SHORT).show()
+                }
+                setNegativeButton("Cancel") {_, _ -> }
+                setTitle("Delete ${currentItem.category}")
+                setMessage("Are you sure you want to delete ${currentItem.category} and all food under the category?")
+                create().show()
+            }
             true
         }
     }
