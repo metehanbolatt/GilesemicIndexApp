@@ -7,94 +7,210 @@
     android:background="#EFEFEF"
     tools:context=".view.fragment.UpdateFragment">
 
-    <EditText
-        android:id="@+id/foodName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Food Name"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="50dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/food_features_background"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <EditText
-        android:id="@+id/glycemicIndex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Glycemic Index"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/foodName" />
+        <ImageView
+            android:id="@+id/exitButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/exit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
-        android:id="@+id/carbohydrates"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Carbohydrates"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/glycemicIndex" />
+        <EditText
+            android:id="@+id/foodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/food_edit_text_background"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:maxLines="1"
+            android:digits="qazwsxedcrfvtgbyhnujmıköolçpşğiüQAZWSXEDCRFVTGBYHNUJMIKÖOLÇPŞĞİÜ()- "
+            android:hint="Food Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/calories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Calories"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/carbohydrates" />
+        <ImageView
+            android:id="@+id/glycemicIndexImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/a_0"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/foodName"
+            app:layout_constraintEnd_toEndOf="@id/foodName"
+            app:layout_constraintTop_toBottomOf="@id/foodName" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/categoryLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calories">
+        <TextView
+            android:id="@+id/glycemicIndexText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Glysemic Index"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gotham_book"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/glycemicIndexImage"
+            app:layout_constraintEnd_toEndOf="@id/glycemicIndexImage"
+            app:layout_constraintTop_toBottomOf="@id/glycemicIndexImage" />
 
-        <AutoCompleteTextView
-            android:id="@+id/category"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Category"
-            android:layout_weight="1" />
+        <EditText
+            android:id="@+id/glycemicIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/food_edit_text_background"
+            android:hint="Glycemic Index"
+            android:padding="5dp"
+            android:digits="0123456789."
+            android:inputType="number"
+            android:maxLength="5"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/glycemicIndexImage"
+            app:layout_constraintEnd_toEndOf="@id/glycemicIndexImage"
+            app:layout_constraintTop_toTopOf="@id/glycemicIndexImage"
+            app:layout_constraintBottom_toBottomOf="@id/glycemicIndexImage" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="@id/glycemicIndexImage"
+            app:layout_constraintEnd_toEndOf="@id/glycemicIndexImage"
+            app:layout_constraintTop_toBottomOf="@id/glycemicIndexText">
 
-    <CheckBox
-        android:id="@+id/favouriteControl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Favourite"
-        android:fontFamily="@font/gotham_bold"
-        app:layout_constraintTop_toBottomOf="@id/categoryLayout"
-        app:layout_constraintEnd_toEndOf="@id/categoryLayout" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/updateButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        android:textAllCaps="false"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/favouriteControl" />
+                <EditText
+                    android:id="@+id/carbohydrates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#DD2C00"
+                    android:textAlignment="center"
+                    android:digits="0123456789.,"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:hint="Carbohydrate"
+                    android:padding="5dp"
+                    android:background="@drawable/food_edit_text_background"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/gotham_bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Carbohydrate"
+                    android:fontFamily="@font/gotham_book"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#DD2C00"
+                    android:textAlignment="center"
+                    android:digits="0123456789.,"
+                    android:inputType="number"
+                    android:hint="Calorie"
+                    android:maxLength="5"
+                    android:padding="5dp"
+                    android:background="@drawable/food_edit_text_background"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/gotham_bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calorie"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/gotham_book"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/categoryLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxStrokeColor="#FF6D00"
+            app:hintTextColor="#FF6D00"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:layout_constraintStart_toStartOf="@id/linear"
+            app:layout_constraintEnd_toEndOf="@id/linear"
+            app:layout_constraintTop_toBottomOf="@id/linear">
+
+            <AutoCompleteTextView
+                android:id="@+id/category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:textSize="14sp"
+                android:hint="Category"
+                android:layout_weight="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/favouriteControl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favourite"
+            android:fontFamily="@font/gotham_bold"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@id/categoryLayout"
+            app:layout_constraintTop_toBottomOf="@id/categoryLayout"/>
+
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:backgroundTint="#FF6D00"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/favouriteControl"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

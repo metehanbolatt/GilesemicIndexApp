@@ -7,6 +7,7 @@
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/category_text_view_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/edit_text_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/edit_text_background_error.xml" value="0.247" />
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/food_edit_text_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/food_features_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/ic_add.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/ic_arrow_left.xml" value="0.247" />
@@ -38,7 +39,7 @@
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_main.xml" value="0.2" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_sign_up.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_update.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_update.xml" value="0.33" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/menu/floating_context_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/menu/main_menu.xml" value="0.36666666666666664" />

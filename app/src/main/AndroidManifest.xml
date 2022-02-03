@@ -13,9 +13,6 @@
         android:theme="@style/splashScreenTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.activity.DenemeActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.activity.EntranceActivity"
             android:exported="true">
             <intent-filter>
@@ -29,7 +26,8 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.MainActivity"
-            android:exported="false"></activity>
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
