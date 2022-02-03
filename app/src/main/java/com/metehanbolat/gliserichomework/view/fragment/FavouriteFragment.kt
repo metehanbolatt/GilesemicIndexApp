@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -75,47 +76,62 @@ class FavouriteFragment : Fragment() {
                 val foodFeatures = FoodFeaturesModel(id.toInt(), foodName, glycemicIndex, carbohydrates, calories, category, favourite.toInt())
                 favouriteList.add(foodFeatures)
             }
+            viewModel.emptyListControl.value = result.isEmpty
+
             binding.lottie.visibility = View.GONE
             adapter = FavouriteRecyclerAdapter(favouriteList, viewModel, firebase)
             binding.favouriteRecyclerView.adapter = adapter
         }
 
-        binding.floatingActionButton.setOnClickListener {
-            val dialogBuilder = AlertDialog.Builder(requireContext())
-                .setView(dialogBinding.root)
-                .setCancelable(false)
-            val dialog = dialogBuilder.show()
-            dialogBinding.exitButton.setOnClickListener {
-                dialog.dismiss()
-                dialogBinding.root.removeSelf()
+        viewModel.emptyListControl.observe(viewLifecycleOwner) {
+            if (it){
+                binding.lottieNoData.playAnimation()
+                binding.lottieNoData.visibility = View.VISIBLE
+            }else{
+                binding.lottieNoData.pauseAnimation()
+                binding.lottieNoData.visibility = View.INVISIBLE
             }
-            val barList = ArrayList<BarEntry>()
-            val labelsName = ArrayList<String>()
-            var counter = 0f
-            favouriteList.forEach {
-                barList.add(BarEntry(counter, it.glycemicIndex.toFloat()))
-                labelsName.add(it.foodName)
-                counter++
-            }
-            val barDataSet = BarDataSet(barList, "Foods")
-            barDataSet.colors = ColorTemplate.createColors(ColorTemplate.MATERIAL_COLORS)
-            barDataSet.valueTextColor = Color.BLACK
-            barDataSet.valueTextSize = 16f
-
-            val barData = BarData(barDataSet)
-            dialogBinding.barChart.setFitBars(true)
-            dialogBinding.barChart.data = barData
-            dialogBinding.barChart.description.text = ""
-            dialogBinding.barChart.animateY(2000)
-            val xAxis = dialogBinding.barChart.xAxis
-            xAxis.valueFormatter = IndexAxisValueFormatter(labelsName)
-            xAxis.position = XAxis.XAxisPosition.BOTTOM
-            xAxis.setDrawGridLines(false)
-            xAxis.setDrawAxisLine(false)
-            xAxis.labelCount = labelsName.size
-            xAxis.labelRotationAngle = 270f
         }
 
+        binding.floatingActionButton.setOnClickListener {
+            if (favouriteList.isNullOrEmpty()){
+                Snackbar.make(it, "There is no data to show", Snackbar.LENGTH_SHORT).show()
+            }else{
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+                    .setView(dialogBinding.root)
+                    .setCancelable(false)
+                val dialog = dialogBuilder.show()
+                dialogBinding.exitButton.setOnClickListener {
+                    dialog.dismiss()
+                    dialogBinding.root.removeSelf()
+                }
+                val barList = ArrayList<BarEntry>()
+                val labelsName = ArrayList<String>()
+                var counter = 0f
+                favouriteList.forEach { foodFeaturesModel ->
+                    barList.add(BarEntry(counter, foodFeaturesModel.glycemicIndex.toFloat()))
+                    labelsName.add(foodFeaturesModel.foodName)
+                    counter++
+                }
+                val barDataSet = BarDataSet(barList, "Foods")
+                barDataSet.colors = ColorTemplate.createColors(ColorTemplate.MATERIAL_COLORS)
+                barDataSet.valueTextColor = Color.BLACK
+                barDataSet.valueTextSize = 16f
+
+                val barData = BarData(barDataSet)
+                dialogBinding.barChart.setFitBars(true)
+                dialogBinding.barChart.data = barData
+                dialogBinding.barChart.description.text = ""
+                dialogBinding.barChart.animateY(2000)
+                val xAxis = dialogBinding.barChart.xAxis
+                xAxis.valueFormatter = IndexAxisValueFormatter(labelsName)
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+                xAxis.setDrawGridLines(false)
+                xAxis.setDrawAxisLine(false)
+                xAxis.labelCount = labelsName.size
+                xAxis.labelRotationAngle = 270f
+            }
+        }
     }
 
     override fun onDestroyView() {

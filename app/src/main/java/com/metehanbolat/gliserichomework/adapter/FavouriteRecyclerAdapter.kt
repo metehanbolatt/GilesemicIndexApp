@@ -38,6 +38,9 @@ class FavouriteRecyclerAdapter(private val favouriteList: ArrayList<FoodFeatures
             commonViewModel.updateFoodFeatures(FoodFeaturesModel(currentItem.id, currentItem.foodName, currentItem.glycemicIndex, currentItem.carbohydrates, currentItem.calories, currentItem.category, 0))
             favouriteList.removeAt(position)
             notifyDataSetChanged()
+            if (favouriteList.isNullOrEmpty()){
+                commonViewModel.emptyListControl.value = true
+            }
         }
 
         holder.binding.rowConstraint.setOnClickListener {

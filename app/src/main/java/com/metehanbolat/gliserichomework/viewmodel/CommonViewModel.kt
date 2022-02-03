@@ -19,6 +19,7 @@ class CommonViewModel(application: Application) : AndroidViewModel(application) 
     val readAllData: LiveData<List<FoodFeaturesModel>>
     val readAllCategory: LiveData<List<CategoryModel>>
     val categoryControl = MutableLiveData<String>()
+    val emptyListControl = MutableLiveData(false)
 
     private val repository: FoodFeaturesRepository
 
