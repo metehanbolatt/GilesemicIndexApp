@@ -12,7 +12,6 @@ import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FavouriteRowBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.view.fragment.FavouriteFragmentDirections
-import com.metehanbolat.gliserichomework.view.fragment.MainFragmentDirections
 import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
 
 class FavouriteRecyclerAdapter(private val favouriteList: ArrayList<FoodFeaturesModel>, private val commonViewModel: CommonViewModel, private var firebase: Firebase): RecyclerView.Adapter<FavouriteRecyclerAdapter.FavouriteViewHolder>() {
