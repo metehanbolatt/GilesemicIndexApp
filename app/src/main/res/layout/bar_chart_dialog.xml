@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:background="@drawable/bar_chart_dialog_background">
 
     <ImageView
         android:id="@+id/exitButton"
@@ -14,6 +14,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="@string/close_button" />
+
+    <TextView
+        android:id="@+id/dialogTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Glycemic Indexes"
+        android:fontFamily="@font/gotham_bold"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"

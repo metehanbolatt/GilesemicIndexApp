@@ -7,6 +7,7 @@ import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
 import com.metehanbolat.gliserichomework.repository.FoodFeaturesRepository
 import com.metehanbolat.gliserichomework.model.CategoryModel
 import com.metehanbolat.gliserichomework.model.CategoryWithFoodFeatures
+import com.metehanbolat.gliserichomework.utils.notifyObserver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -88,10 +89,5 @@ class CommonViewModel(application: Application) : AndroidViewModel(application) 
     suspend fun getFavouriteFoodFeatures(): List<FoodFeaturesModel> {
         return repository.getFavouriteFoodFeatures()
     }
-
-
-}
-
-fun <T> MutableLiveData<T>.notifyObserver() {
-    this.postValue(this.value)
+    
 }

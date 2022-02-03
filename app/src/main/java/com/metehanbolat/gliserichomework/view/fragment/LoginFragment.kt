@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.databinding.FragmentLoginBinding
@@ -41,13 +43,39 @@ class LoginFragment : Fragment() {
         }
 
         binding.logInButton.setOnClickListener {
-            loginFragmentViewModel.logInFirebase(requireActivity(), it, binding.email.text.toString(), binding.password.text.toString(), firebase)
+            when {
+                binding.email.text.isBlank() -> {
+                    Snackbar.make(it, "Email must be filled.", Snackbar.LENGTH_SHORT).show()
+                }
+                binding.password.text.isBlank() -> {
+                    Snackbar.make(it, "Password must be filled.", Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {
+                    loginFragmentViewModel.logInFirebase(requireActivity(), it, binding.email.text.toString(), binding.password.text.toString(), firebase)
+                }
+            }
+        }
+
+        loginFragmentViewModel.loadingControl.observe(viewLifecycleOwner) {
+            loadingControl(it)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun loadingControl(control: Boolean) {
+        if (control) {
+            binding.logInConstraint.visibility = View.INVISIBLE
+            binding.lottie.visibility = View.VISIBLE
+            binding.lottie.playAnimation()
+        }else{
+            binding.logInConstraint.visibility = View.VISIBLE
+            binding.lottie.pauseAnimation()
+            binding.lottie.visibility = View.INVISIBLE
+        }
     }
 
 }

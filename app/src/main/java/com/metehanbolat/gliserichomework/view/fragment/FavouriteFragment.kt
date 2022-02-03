@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -20,14 +19,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.metehanbolat.gliserichomework.R
 import com.metehanbolat.gliserichomework.adapter.FavouriteRecyclerAdapter
 import com.metehanbolat.gliserichomework.databinding.BarChartDialogBinding
 import com.metehanbolat.gliserichomework.databinding.FragmentFavouriteBinding
 import com.metehanbolat.gliserichomework.model.FoodFeaturesModel
+import com.metehanbolat.gliserichomework.utils.removeSelf
 import com.metehanbolat.gliserichomework.viewmodel.CommonViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class FavouriteFragment : Fragment() {
 
@@ -57,7 +54,6 @@ class FavouriteFragment : Fragment() {
         firestore = firebase.firestore
         viewModel = ViewModelProvider(this)[CommonViewModel::class.java]
         favouriteList = ArrayList()
-
 
         return view
     }
@@ -128,10 +124,4 @@ class FavouriteFragment : Fragment() {
         _dialogBinding = null
     }
 
-}
-
-fun View?.removeSelf() {
-    this ?: return
-    val parentView = parent as? ViewGroup ?: return
-    parentView.removeView(this)
 }

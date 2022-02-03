@@ -49,11 +49,27 @@ class SignUpFragment : Fragment() {
             }
         }
 
+        signUpFragmentViewModel.loadingControl.observe(viewLifecycleOwner) {
+            loadingControl(it)
+        }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun loadingControl(control: Boolean) {
+        if (control) {
+            binding.signUpConstraint.visibility = View.INVISIBLE
+            binding.lottie.visibility = View.VISIBLE
+            binding.lottie.playAnimation()
+        }else{
+            binding.signUpConstraint.visibility = View.VISIBLE
+            binding.lottie.pauseAnimation()
+            binding.lottie.visibility = View.INVISIBLE
+        }
     }
 
 }

@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/bar_chart_dialog_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/category_text_view_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/edit_text_background.xml" value="0.247" />
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/edit_text_background_error.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/food_features_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/ic_add.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/ic_arrow_left.xml" value="0.247" />
