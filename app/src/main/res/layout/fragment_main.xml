@@ -10,6 +10,16 @@
     tools:context=".view.fragment.MainFragment">
 
     <ImageView
+        android:id="@+id/sortIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sort"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/black" />
+
+    <ImageView
         android:id="@+id/logo"
         android:layout_width="40dp"
         android:layout_height="40dp"

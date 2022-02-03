@@ -46,6 +46,8 @@ class MainFragment : Fragment() {
         sharedPreferences = this.requireActivity().getSharedPreferences("com.metehanbolat.gliserichomework", Context.MODE_PRIVATE)
         firebase = Firebase
 
+        registerForContextMenu(binding.sortIcon)
+
         commonViewModel.viewModelScope.launch(Dispatchers.IO) {
             val control = sharedPreferences.getInt("control", 0)
             if (control == 0) {
@@ -257,5 +259,28 @@ class MainFragment : Fragment() {
                 foodFeaturesAdapter.setData(it)
             }
         }
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        MenuInflater(requireContext()).inflate(R.menu.floating_context_menu, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        commonViewModel.readAllData.observe(viewLifecycleOwner) { foodFeatures ->
+            foodFeatures as ArrayList<FoodFeaturesModel>
+            when(item.itemId) {
+                R.id.descending -> {
+                    foodFeatures.sortBy { it.glycemicIndex.toInt() }
+                    foodFeatures.reverse()
+                    foodFeaturesAdapter.setData(foodFeatures)
+                }
+                R.id.ascending -> {
+                    foodFeatures.sortBy { it.glycemicIndex.toInt() }
+                    foodFeaturesAdapter.setData(foodFeatures)
+                }
+            }
+        }
+        return super.onContextItemSelected(item)
     }
 }
