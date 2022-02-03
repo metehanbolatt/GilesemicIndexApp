@@ -2,4 +2,6 @@
 <resources>
     <string name="search">Search</string>
     <string name="add_button">Add Button</string>
+    <string name="close_button">Close Button</string>
+    <string name="bar_chart_button">Bar Chart Button</string>
 </resources>

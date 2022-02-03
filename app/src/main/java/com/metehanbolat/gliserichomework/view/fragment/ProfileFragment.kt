@@ -42,17 +42,14 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.exitButton.setOnClickListener {
+        binding.signOutConstraint.setOnClickListener {
             profileFragmentViewModel.exitApp(requireActivity(), auth)
         }
 
         profileFragmentViewModel.userData.observe(viewLifecycleOwner) { userModel ->
             binding.apply {
-                userName.text = userModel.name
-                userSurname.text = userModel.surname
-                userPhone.text = userModel.phone
-                userEmail.text = userModel.email
-                userPassword.text = userModel.password
+                name.text = userModel.name
+                surname.text = userModel.surname
             }
         }
 

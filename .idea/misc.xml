@@ -17,11 +17,14 @@
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/ic_phone.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/ic_profile.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/ic_search.xml" value="0.247" />
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/profile_button_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/search_edit_text_background.xml" value="0.247" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/drawable/splash_background.xml" value="0.247" />
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/activity_deneme.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/activity_entrance.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/bar_chart_dialog.xml" value="0.33" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/category_row.xml" value="0.75" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/dropdown_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/favourite_row.xml" value="0.36666666666666664" />
@@ -31,7 +34,7 @@
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_favourite.xml" value="0.33" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_main.xml" value="0.2" />
-        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_sign_up.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/layout/fragment_update.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/meteb/Desktop/GlisericHomeWork/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
