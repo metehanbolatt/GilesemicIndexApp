@@ -140,7 +140,7 @@ class UpdateFragment : Fragment() {
     }
 
     private fun addCategoryToDatabase() {
-        val category = binding.category.text.toString()
+        val category = binding.category.text.toString().uppercase()
         val categoryModel = CategoryModel(category, 999)
         commonViewModel.addCategory(categoryModel)
     }
